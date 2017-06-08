@@ -24,11 +24,13 @@
 
 package cn.wcode.service;
 
+import cn.wcode.core.Ebbinghaus;
 import cn.wcode.mapper.QuestionMapper;
 import cn.wcode.mapper.ReciteRecordMapper;
 import cn.wcode.model.Question;
 import cn.wcode.model.ReciteRecord;
 import com.github.pagehelper.PageHelper;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,11 +41,11 @@ public class ReciteRecordService {
     @Autowired
     private ReciteRecordMapper reciteRecordMapper;
 
-    public List<ReciteRecord> getAll(ReciteRecord reciteRecord) {
+    public List<ReciteRecord> selectTodayTask(ReciteRecord reciteRecord) {
         if (reciteRecord.getPage() != null && reciteRecord.getRows() != null) {
             PageHelper.startPage(reciteRecord.getPage(), reciteRecord.getRows());
         }
-        return reciteRecordMapper.selectAll();
+        return reciteRecordMapper.selectTodayTask();
     }
 
     public ReciteRecord getById(Integer id) {
@@ -56,9 +58,50 @@ public class ReciteRecordService {
 
     public void save(ReciteRecord reciteRecord) {
         if (reciteRecord.getId() != null) {
+            reciteRecord.setLastDate(new Date());
             reciteRecordMapper.updateByPrimaryKey(reciteRecord);
         } else {
+            reciteRecord.setStartDate(new Date());
+            reciteRecord.setLastDate(new Date());
+            reciteRecord.setLevel(0);
+            reciteRecord.setStrange(0);
             reciteRecordMapper.insert(reciteRecord);
         }
+    }
+
+    public void addQuestions(List<Question> questions) {
+        for(Question q : questions){
+            ReciteRecord reciteRecord = ReciteRecord.builder()
+                .userId(1)
+                .questionId(q.getId())
+                .level(0)
+                .strange(0)
+                .startDate(new Date())
+                .nextDate(new Date())
+                .build();
+            reciteRecordMapper.insert(reciteRecord);
+        }
+    }
+
+    /**
+     * 修改已背单条记录
+     * status : -1,完全记得，当前题目不再出现 0, 不记得 1，记得
+     */
+    public void modifyReciteRecord(int id, int status) {
+        ReciteRecord reciteRecord = reciteRecordMapper.selectByPrimaryKey(id);
+        if(status == 1){
+            Integer level = reciteRecord.getLevel();
+            if(level >= 7) { // 当前题目不需要背诵
+                reciteRecord.setNeedRecite(0);
+            } else { // level + 1
+                reciteRecord.setLastDate(new Date());
+                long nextTime = System.currentTimeMillis() + Ebbinghaus.FORGETTIN_CURVE[reciteRecord.getLevel()];
+                reciteRecord.setNextDate(new Date(nextTime));
+                reciteRecord.setLevel(reciteRecord.getLevel() + 1);
+            }
+        } else if(status == -1) { // 当前题目不需要背诵
+            reciteRecord.setNeedRecite(0);
+        }
+        reciteRecordMapper.updateByPrimaryKey(reciteRecord);
     }
 }

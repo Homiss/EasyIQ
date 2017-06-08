@@ -25,6 +25,13 @@
 package cn.wcode.model;
 
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 基础信息
@@ -32,6 +39,7 @@ import javax.persistence.*;
  * @author liuzh
  * @since 2016-01-31 21:42
  */
+
 public class BaseEntity {
     @Id
     @Column(name = "Id")

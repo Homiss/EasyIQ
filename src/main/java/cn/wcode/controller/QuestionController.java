@@ -43,7 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2015-12-19 11:10
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/question")
 public class QuestionController {
 
     @Autowired

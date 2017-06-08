@@ -24,12 +24,9 @@
 
 package cn.wcode.service;
 
-import cn.wcode.mapper.CityMapper;
 import cn.wcode.mapper.QuestionMapper;
-import cn.wcode.model.City;
 import cn.wcode.model.Question;
 import com.github.pagehelper.PageHelper;
-import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,5 +68,7 @@ public class QuestionService {
     }
 
 
-
+    public List<Question> getByQuestionGroupId(int qGroupId) {
+        return questionMapper.getByQuestionGroupId(qGroupId);
+    }
 }
