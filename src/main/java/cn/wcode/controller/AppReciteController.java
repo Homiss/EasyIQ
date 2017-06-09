@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/app/v1/recite")
+@RequestMapping("/app/recite")
 public class AppReciteController {
 
   @Autowired
@@ -29,7 +29,7 @@ public class AppReciteController {
   /**
    * 添加题库到我的
    */
-  @RequestMapping("/add")
+  @RequestMapping("/v1/add")
   @ResponseBody
   public Result<String> addQuestionGroup(int qGroupId){
     List<Question> questions = questionService.getByQuestionGroupId(qGroupId);
@@ -42,7 +42,7 @@ public class AppReciteController {
    * @param reciteRecord
    * @return
    */
-  @RequestMapping("/today/task")
+  @RequestMapping("/v1/today/task")
   @ResponseBody
   public Result<PageInfo<ReciteRecord>> selectTodayTask(ReciteRecord reciteRecord) {
     List<ReciteRecord> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
@@ -53,7 +53,7 @@ public class AppReciteController {
    * 修改已背单条记录
    * status : -1,完全记得，当前题目不再出现 0, 不记得 1，记得
    */
-  @RequestMapping(value = "/modify/record", method = RequestMethod.POST)
+  @RequestMapping(value = "/v1/modify/record", method = RequestMethod.POST)
   @ResponseBody
   public Result<String> modifyReciteRecord(int id, int status){
     reciteRecordService.modifyReciteRecord(id, status);

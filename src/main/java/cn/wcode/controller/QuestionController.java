@@ -25,9 +25,7 @@
 package cn.wcode.controller;
 
 import cn.wcode.model.Question;
-import cn.wcode.model.UserInfo;
 import cn.wcode.service.QuestionService;
-import cn.wcode.service.UserInfoService;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

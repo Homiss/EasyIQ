@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wcode.mapper.UserAuthsMapper" >
+  <resultMap id="BaseResultMap" type="cn.wcode.model.UserAuths" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="identity_type" property="identityType" jdbcType="VARCHAR" />
+    <result column="credential" property="credential" jdbcType="VARCHAR" />
+    <result column="first_party" property="firstParty" jdbcType="TINYINT" />
+  </resultMap>
+  <select id="selectByPhoneAndPassword" resultType="cn.wcode.model.UserAuths">
+    select * from user_auths where phone = #{phone} and credential = #{password}
+  </select>
+</mapper>

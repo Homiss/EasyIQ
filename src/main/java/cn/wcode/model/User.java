@@ -1,6 +1,6 @@
 package cn.wcode.model;
 
-import javax.persistence.*;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -16,44 +16,30 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Table(name = "user_info")
-public class UserInfo extends BaseEntity{
+public class User extends BaseEntity{
 
     /**
      * 用户名
      */
-    private String username;
+    private String name;
 
     /**
-     * 密码
+     * 邮箱
      */
-    private String password;
-
-    /**
-     * 用户类型
-     */
-    private String usertype;
-
-    /**
-     * 是否可用
-     */
-    private Integer enabled;
-
-    /**
-     * 真实姓名
-     */
-    private String realname;
-
-    /**
-     * QQ
-     */
-    private String qq;
-
     private String email;
 
     /**
      * 联系电话
      */
-    private String tel;
+    private String phone;
+
+    /**
+     * 是否可用 0,不可用 1，可用
+     */
+    private Integer enabled;
+
+    private String token;
+
+    private Date registDate;
 
 }

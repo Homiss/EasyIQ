@@ -1,5 +1,7 @@
 package cn.wcode.dto;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Created by homiss on 2017/6/8.
  */
@@ -7,7 +9,7 @@ public class Result<T> {
 
   private Boolean success;
 
-  private String returnCode;
+  private HttpStatus returnCode;
 
   private T data;
 
@@ -23,7 +25,7 @@ public class Result<T> {
     this.error = error;
   }
 
-  public Result(Boolean success, String returnCode, String error) {
+  public Result(Boolean success, HttpStatus returnCode, String error) {
     this.success = success;
     this.returnCode = returnCode;
     this.error = error;
@@ -37,11 +39,11 @@ public class Result<T> {
     this.success = success;
   }
 
-  public String getReturnCode() {
+  public HttpStatus getReturnCode() {
     return returnCode;
   }
 
-  public void setReturnCode(String returnCode) {
+  public void setReturnCode(HttpStatus returnCode) {
     this.returnCode = returnCode;
   }
 

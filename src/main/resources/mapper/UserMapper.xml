@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wcode.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.wcode.model.User" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="regist_date" property="registDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="selectUserByToken" resultType="cn.wcode.model.User">
+    select * from user where id = #{userId} and token = #{token}
+  </select>
+</mapper>
