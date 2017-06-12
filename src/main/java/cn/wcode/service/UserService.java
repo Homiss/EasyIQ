@@ -1,7 +1,6 @@
 package cn.wcode.service;
 
 import cn.wcode.convert.UserAndUserInfoConvert;
-import cn.wcode.dto.Result;
 import cn.wcode.dto.UserInfoDto;
 import cn.wcode.mapper.UserAuthsMapper;
 import cn.wcode.mapper.UserMapper;

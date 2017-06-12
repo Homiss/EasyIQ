@@ -22,6 +22,7 @@ public class AppUserController {
   /**
    * 用户注册
    */
+  @RequestMapping("/v1/regist")
   @ResponseBody
   public Result<String> regist(String name, String phone, String password){
     userService.regist(name, phone, password);
@@ -31,6 +32,7 @@ public class AppUserController {
   /**
    * 三方用户注册
    */
+  @RequestMapping("/v1/third/regist")
   @ResponseBody
   public Result<String> thirdRegist(){
     return new Result<>("");
@@ -39,6 +41,7 @@ public class AppUserController {
   /**
    * 用户登录
    */
+  @RequestMapping("/v1/login")
   @ResponseBody
   public Result<UserInfoDto> login(String phone, String password){
     UserInfoDto userInfo = null;

@@ -69,10 +69,10 @@ public class ReciteRecordService {
         }
     }
 
-    public void addQuestions(List<Question> questions) {
+    public void addQuestions(Integer userId, List<Question> questions) {
         for(Question q : questions){
             ReciteRecord reciteRecord = ReciteRecord.builder()
-                .userId(1)
+                .userId(userId)
                 .questionId(q.getId())
                 .level(0)
                 .strange(0)

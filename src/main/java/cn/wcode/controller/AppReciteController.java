@@ -23,19 +23,6 @@ public class AppReciteController {
 
   @Autowired
   private ReciteRecordService reciteRecordService;
-  @Autowired
-  private QuestionService questionService;
-
-  /**
-   * 添加题库到我的
-   */
-  @RequestMapping("/v1/add")
-  @ResponseBody
-  public Result<String> addQuestionGroup(int qGroupId){
-    List<Question> questions = questionService.getByQuestionGroupId(qGroupId);
-    reciteRecordService.addQuestions(questions);
-    return new Result<>("添加题库成功～");
-  }
 
   /**
    * 获取需要背诵的题目列表
@@ -44,7 +31,7 @@ public class AppReciteController {
    */
   @RequestMapping("/v1/today/task")
   @ResponseBody
-  public Result<PageInfo<ReciteRecord>> selectTodayTask(ReciteRecord reciteRecord) {
+  public Result<PageInfo<ReciteRecord>> selectTodayTask(int userId, int qGroupId, ReciteRecord reciteRecord) {
     List<ReciteRecord> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
     return new Result<>(new PageInfo<>(reciteRecordList));
   }
