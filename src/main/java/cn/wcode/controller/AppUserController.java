@@ -2,7 +2,6 @@ package cn.wcode.controller;
 
 import cn.wcode.dto.Result;
 import cn.wcode.dto.UserInfoDto;
-import cn.wcode.model.User;
 import cn.wcode.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

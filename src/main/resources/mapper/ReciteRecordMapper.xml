@@ -13,8 +13,12 @@
     <result column="need_recite" jdbcType="INTEGER" property="needRecite" />
   </resultMap>
 
-  <select id="selectTodayTask" resultMap="BaseResultMap">
-    select * from recite_record where now() >= next_date and need_recite = 1
+  <select id="selectTodayTask" resultType="cn.wcode.dto.ReciteQuestionDto">
+    select
+    r.id, r.question_id as questionId, q.question, q.answer, r.level, r.strange
+    from recite_record r
+    left join question q on q.id = r.question_id
+    where now() >= r.next_date and need_recite = 1
   </select>
 </mapper>
 

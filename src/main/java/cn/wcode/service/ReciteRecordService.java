@@ -25,6 +25,7 @@
 package cn.wcode.service;
 
 import cn.wcode.core.Ebbinghaus;
+import cn.wcode.dto.ReciteQuestionDto;
 import cn.wcode.mapper.QuestionMapper;
 import cn.wcode.mapper.ReciteRecordMapper;
 import cn.wcode.model.Question;
@@ -32,6 +33,7 @@ import cn.wcode.model.ReciteRecord;
 import com.github.pagehelper.PageHelper;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,7 @@ public class ReciteRecordService {
     @Autowired
     private ReciteRecordMapper reciteRecordMapper;
 
-    public List<ReciteRecord> selectTodayTask(ReciteRecord reciteRecord) {
+    public List<ReciteQuestionDto> selectTodayTask(ReciteRecord reciteRecord) {
         if (reciteRecord.getPage() != null && reciteRecord.getRows() != null) {
             PageHelper.startPage(reciteRecord.getPage(), reciteRecord.getRows());
         }
