@@ -18,6 +18,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "user_auths")
 public class UserAuths extends BaseEntity{
+
     /**
      * 用户的唯一标示
      */
@@ -45,5 +46,6 @@ public class UserAuths extends BaseEntity{
      */
     @Column(name = "first_party")
     private Byte firstParty;
+
 
 }

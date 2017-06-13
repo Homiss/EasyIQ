@@ -44,7 +44,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2015-12-19 11:10
  */
 @RestController
-@RequestMapping("/app/question")
+@RequestMapping("/api/app/question")
 public class AppQuestionBankController {
 
     @Autowired

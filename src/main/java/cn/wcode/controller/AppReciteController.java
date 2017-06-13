@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/app/recite")
+@RequestMapping("/api/app/recite")
 public class AppReciteController {
 
   @Autowired
@@ -31,7 +32,8 @@ public class AppReciteController {
    */
   @RequestMapping("/v1/today/task")
   @ResponseBody
-  public Result<PageInfo<ReciteRecord>> selectTodayTask(int userId, int qGroupId, ReciteRecord reciteRecord) {
+  public Result<PageInfo<ReciteRecord>> selectTodayTask(@RequestParam("userId") int userId,
+      @RequestParam("groupId") int groupId, ReciteRecord reciteRecord) {
     List<ReciteRecord> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
     return new Result<>(new PageInfo<>(reciteRecordList));
   }
