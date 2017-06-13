@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wcode.mapper.SettingMapper" >
+  <resultMap id="BaseResultMap" type="cn.wcode.model.Setting" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="q_group_id" property="qGroupId" jdbcType="INTEGER" />
+    <result column="recite_model" property="reciteModel" jdbcType="INTEGER" />
+    <result column="recite_num" property="reciteNum" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select * from setting where user_id = #{userId}
+  </select>
+  <select id="selectMapByUserId" resultType="java.util.Map">
+    select
+    s.id, s.q_group_id as qGroupId, s.recite_model as reciteModel, s.recite_num as reciteNum,
+    g.name as groupName
+    from setting s
+    left join question_group g on g.id = s.q_group_id
+    where s.user_id = #{userId}
+  </select>
+</mapper>
