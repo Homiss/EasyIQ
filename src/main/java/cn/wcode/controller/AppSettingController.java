@@ -2,6 +2,8 @@ package cn.wcode.controller;
 
 import cn.wcode.dto.Result;
 import cn.wcode.model.Setting;
+import cn.wcode.service.QuestionService;
+import cn.wcode.service.ReciteRecordService;
 import cn.wcode.service.SettingService;
 import freemarker.ext.beans.HashAdapter;
 import java.util.HashMap;
@@ -23,6 +25,8 @@ public class AppSettingController {
 
   @Autowired
   private SettingService settingService;
+  @Autowired
+  private ReciteRecordService reciteRecordService;
 
   /**
    * 获取当前用户设置
@@ -31,6 +35,13 @@ public class AppSettingController {
   @ResponseBody
   public Result<Map<String, Object>> setting(Integer userId){
     Map<String, Object> result = settingService.selectMapByUserId(userId);
+
+    // 根据groupId获取总题数
+    Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(result.get("qGroupId")));
+    // 获取已背题数
+    Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId, String.valueOf(result.get("qGroupId")));
+    result.put("sumCount", sumCount);
+    result.put("hasReciteCount", hasReciteCount);
     return new Result<>(result);
   }
 
