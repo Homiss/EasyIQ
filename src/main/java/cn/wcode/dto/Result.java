@@ -9,7 +9,7 @@ public class Result<T> {
 
   private Boolean success;
 
-  private HttpStatus returnCode;
+  private Integer returnCode;
 
   private T data;
 
@@ -27,7 +27,7 @@ public class Result<T> {
 
   public Result(Boolean success, HttpStatus returnCode, String error) {
     this.success = success;
-    this.returnCode = returnCode;
+    this.returnCode = returnCode.value();
     this.error = error;
   }
 
@@ -39,11 +39,11 @@ public class Result<T> {
     this.success = success;
   }
 
-  public HttpStatus getReturnCode() {
+  public Integer getReturnCode() {
     return returnCode;
   }
 
-  public void setReturnCode(HttpStatus returnCode) {
+  public void setReturnCode(Integer returnCode) {
     this.returnCode = returnCode;
   }
 

@@ -1,12 +1,14 @@
 package cn.wcode.controller;
 
 import cn.wcode.dto.Result;
+import cn.wcode.model.Question;
 import cn.wcode.model.Setting;
 import cn.wcode.service.QuestionService;
 import cn.wcode.service.ReciteRecordService;
 import cn.wcode.service.SettingService;
 import freemarker.ext.beans.HashAdapter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class AppSettingController {
   private SettingService settingService;
   @Autowired
   private ReciteRecordService reciteRecordService;
+  @Autowired
+  private QuestionService questionService;
 
   /**
    * 获取当前用户设置
@@ -35,7 +39,18 @@ public class AppSettingController {
   @ResponseBody
   public Result<Map<String, Object>> setting(Integer userId){
     Map<String, Object> result = settingService.selectMapByUserId(userId);
-
+    if(result == null){ // 用户初次使用
+      Setting setting = Setting.builder()
+          .userId(userId)
+          .qGroupId(1)
+          .reciteModel(1)
+          .reciteNum(20)
+          .build();
+      settingService.insert(setting);
+      List<Question> questions = questionService.getByQuestionGroupId(1);
+      reciteRecordService.addQuestions(userId, questions);
+      result = settingService.selectMapByUserId(userId);
+    }
     // 根据groupId获取总题数
     Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(result.get("qGroupId")));
     // 获取已背题数

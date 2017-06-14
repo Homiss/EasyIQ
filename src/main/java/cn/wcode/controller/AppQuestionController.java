@@ -68,7 +68,7 @@ public class AppQuestionController {
     public Result<List<Map<String, String>>> getAll(Integer userId) {
         List<QuestionGroup> questiongroupList = questionGroupService.selectAll();
         List<Map<String, String>> groups = new ArrayList<>();
-        for(QuestionGroup questionGroup : questiongroupList){
+        for(QuestionGroup questionGroup : questiongroupList) {
             Map<String, String> temp = new HashMap<>();
             temp.put("name", questionGroup.getName());
             temp.put("id", String.valueOf(questionGroup.getId()));

@@ -26,6 +26,8 @@ public class UserInfoDto {
    */
   private String name;
 
+  private String headpic;
+
   /**
    * 邮箱
    */

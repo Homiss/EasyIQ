@@ -1,5 +1,6 @@
 package cn.wcode.filter;
 
+import cn.wcode.SpringUtils;
 import cn.wcode.constants.ErrorInfoConstants;
 import cn.wcode.dto.Result;
 import cn.wcode.model.User;
@@ -7,9 +8,9 @@ import cn.wcode.service.UserService;
 import com.alibaba.fastjson.JSON;
 import javax.servlet.annotation.WebFilter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -19,22 +20,21 @@ import java.util.Map;
  * Created by jimin on 15/11/22.
  */
 @Slf4j
-@WebFilter(filterName="appLoginFilter",urlPatterns="/*")
+@WebFilter(filterName="appLoginFilter")
 public class AppLoginFilter implements Filter {
 
+  @Autowired
   private UserService userService;
 
   @Override
   public void init(FilterConfig config) throws ServletException {
     log.info("login filter init config");
-    ServletContext sc = config.getServletContext();
-    XmlWebApplicationContext cxt = (XmlWebApplicationContext) WebApplicationContextUtils.getWebApplicationContext(sc);
-    if(cxt != null && cxt.getBean("userService") != null && userService == null)
-      userService = (UserService) cxt.getBean("userService");
   }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    userService = (UserService) SpringUtils.getBean("userService");
+
     HttpServletRequest req = (HttpServletRequest) request;
     response.setCharacterEncoding("UTF-8");
     response.setContentType("application/json; charset=utf-8");
@@ -51,7 +51,7 @@ public class AppLoginFilter implements Filter {
     if(req.getParameter("userId") == null || req.getParameter("token") == null){
       try {
         out = response.getWriter();
-        out.write(JSON.toJSONString(new Result<>(ErrorInfoConstants.LOGIN_ERROR, false)));
+        out.write(JSON.toJSONString(new Result<>(false, HttpStatus.FORBIDDEN, ErrorInfoConstants.LOGIN_ERROR)));
         return;
       } catch (IOException e) {
         e.printStackTrace();

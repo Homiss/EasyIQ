@@ -13,7 +13,9 @@
     <result column="first_party" jdbcType="TINYINT" property="firstParty" />
   </resultMap>
 
-  <select id="selectByPhoneAndPassword" resultType="cn.wcode.model.UserAuths">
-    select * from user_auths where phone = #{phone} and credential = #{password}
+  <select id="selectByPhoneAndPassword" resultMap="BaseResultMap">
+    select a.* from user_auths a
+    right join user u on u.id = a.user_id and u.phone = #{phone}
+    where a.credential = #{password}
   </select>
 </mapper>

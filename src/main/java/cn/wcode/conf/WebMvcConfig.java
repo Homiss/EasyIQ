@@ -24,6 +24,13 @@
 
 package cn.wcode.conf;
 
+import cn.wcode.filter.AppLoginFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -34,6 +41,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+
+    @Bean
+    public FilterRegistrationBean getAppLoginFilter(){
+        AppLoginFilter appLoginFilter = new AppLoginFilter();
+        FilterRegistrationBean registrationBean=new FilterRegistrationBean();
+        registrationBean.setFilter(appLoginFilter);
+        Map<String,String> m = new HashMap<String,String>();
+        m.put("targetBeanName","appLoginFilter");
+        m.put("targetFilterLifecycle","true");
+        registrationBean.setInitParameters(m);
+        List<String> urlPatterns=new ArrayList<String>();
+        urlPatterns.add("/api/app/question/*");
+        urlPatterns.add("/api/app/recite/*");
+        urlPatterns.add("/api/app/setting/*");
+        registrationBean.setUrlPatterns(urlPatterns);
+        registrationBean.setOrder(1);
+        return registrationBean;
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

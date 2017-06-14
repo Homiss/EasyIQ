@@ -24,7 +24,12 @@ public class AppUserController {
   @RequestMapping("/v1/regist")
   @ResponseBody
   public Result<String> regist(String name, String phone, String password){
-    userService.regist(name, phone, password);
+    try {
+      userService.regist(name, phone, password);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new Result<>("系统错误，注册账号失败～");
+    }
     return new Result<>("注册账号成功～");
   }
 

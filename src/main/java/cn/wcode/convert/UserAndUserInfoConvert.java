@@ -11,6 +11,7 @@ public class UserAndUserInfoConvert {
   public static User toUser(UserInfoDto userInfoDto){
     User user = User.builder()
         .name(userInfoDto.getName())
+        .headpic(userInfoDto.getHeadpic())
         .phone(userInfoDto.getPhone())
         .enabled(userInfoDto.getEnabled())
         .token(userInfoDto.getToken())
@@ -25,6 +26,7 @@ public class UserAndUserInfoConvert {
     UserInfoDto userInfoDto = UserInfoDto.builder()
         .userId(user.getId())
         .name(user.getName())
+        .headpic(user.getHeadpic())
         .phone(user.getPhone())
         .enabled(user.getEnabled())
         .token(user.getToken())

@@ -31,7 +31,7 @@ public class UserAuths extends BaseEntity{
     private String identity;
 
     /**
-     * 登录方式
+     * 登录方式 phone weibo wechat
      */
     @Column(name = "identity_type")
     private String identityType;

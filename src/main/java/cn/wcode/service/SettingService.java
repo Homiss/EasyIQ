@@ -27,4 +27,8 @@ public class SettingService {
     setting.setReciteModel(model);
     settingMapper.updateByPrimaryKey(setting);
   }
+
+  public void insert(Setting setting) {
+    settingMapper.insertSelective(setting);
+  }
 }
