@@ -80,6 +80,7 @@ public class ReciteRecordService {
                 .strange(0)
                 .startDate(new Date())
                 .nextDate(new Date())
+                .needRecite(1)
                 .build();
             reciteRecordMapper.insert(reciteRecord);
         }

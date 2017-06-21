@@ -45,7 +45,7 @@ public class AppReciteController {
    */
   @RequestMapping(value = "/v1/modify/record", method = RequestMethod.POST)
   @ResponseBody
-  public Result<String> modifyReciteRecord(int id, int status){
+  public Result<String> s(int id, int status){
     reciteRecordService.modifyReciteRecord(id, status);
     return new Result<>("更新记录成功～");
   }

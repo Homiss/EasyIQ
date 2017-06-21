@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,11 +37,22 @@ public class AppQuestionController {
     private QuestionGroupService questionGroupService;
 
     /**
+     * 添加题库到我的
+     */
+    @RequestMapping("/v1/add")
+    @ResponseBody
+    public Result<String> addQuestionGroup(Integer userId, int qGroupId){
+        List<Question> questions = questionService.getByQuestionGroupId(qGroupId);
+        reciteRecordService.addQuestions(userId, questions);
+        return new Result<>("添加题库成功～");
+    }
+
+    /**
      * 获取题库列表
      * @param userId
      * @return
      */
-    @RequestMapping("/v1/list")
+    @RequestMapping("/v1/groups")
     public Result<List<Map<String, String>>> getAll(Integer userId) {
         List<QuestionGroup> questiongroupList = questionGroupService.selectAll();
         List<Map<String, String>> groups = new ArrayList<>();
@@ -60,14 +72,12 @@ public class AppQuestionController {
     }
 
     /**
-     * 添加题库到我的
+     * 通过题库获取题目列表
      */
-    @RequestMapping("/v1/add")
-    @ResponseBody
-    public Result<String> addQuestionGroup(Integer userId, int qGroupId){
-        List<Question> questions = questionService.getByQuestionGroupId(qGroupId);
-        reciteRecordService.addQuestions(userId, questions);
-        return new Result<>("添加题库成功～");
+    @RequestMapping("/v1/groups/list")
+    public Result<List<Question>> questionList(@RequestParam("userId") Integer userId,
+        @RequestParam("groupId") Integer groupId){
+        List<Question> questions = questionService.getByQuestionGroupId(groupId);
+        return new Result<>(questions);
     }
-
 }
