@@ -7,6 +7,9 @@ import cn.wcode.service.QuestionGroupService;
 import cn.wcode.service.QuestionService;
 import cn.wcode.service.ReciteRecordService;
 import com.github.pagehelper.PageInfo;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,5 +82,15 @@ public class AppQuestionController {
         @RequestParam("groupId") Integer groupId){
         List<Question> questions = questionService.getByQuestionGroupId(groupId);
         return new Result<>(questions);
+    }
+
+    /**
+     * 修改题目答案
+     */
+    @RequestMapping(value = "/v1/modify/answer", method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> modifyAnswer(int id, String answer){
+        questionService.modifyAnswer(id, answer);
+        return new Result<>("操作成功~");
     }
 }

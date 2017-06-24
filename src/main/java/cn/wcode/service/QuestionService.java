@@ -71,4 +71,11 @@ public class QuestionService {
     public List<Question> getByQuestionGroupId(int qGroupId) {
         return questionMapper.getByQuestionGroupId(qGroupId);
     }
+
+  public void modifyAnswer(int id, String answer) {
+      Question question = new Question();
+      question.setId(id);
+      question.setAnswer(answer);
+      questionMapper.updateByPrimaryKeySelective(question);
+  }
 }
