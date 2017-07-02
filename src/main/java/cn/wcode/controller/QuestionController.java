@@ -1,10 +1,16 @@
 
 package cn.wcode.controller;
 
+import cn.wcode.dto.Result;
 import cn.wcode.model.Question;
 import cn.wcode.service.QuestionService;
+import cn.wcode.util.FileUtil;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,4 +70,27 @@ public class QuestionController {
         result.put("msg", msg);
         return result;
     }
+
+    @RequestMapping(value = "/import", method = RequestMethod.POST)
+    public Result<String> importData(String filepath) {
+        String txt = FileUtil.readTxtFile(filepath);
+        Pattern p = Pattern.compile("<h3[\\s\\S]*?(?=<h3)");
+        Matcher m = p.matcher(txt);
+        while(m.find()) {
+            Integer groupId = 1;
+            String content = m.group();
+            Document doc = Jsoup.parse(content);
+            String question = doc.select("h3").first().text();
+            doc.select("h3").first().remove();
+            String answer = doc.body().html();
+            Question bean = Question.builder()
+                .question(question)
+                .answer(answer)
+                .qGroupId(groupId)
+                .build();
+            questionService.save(bean);
+        }
+        return new Result<>("");
+    }
+
 }

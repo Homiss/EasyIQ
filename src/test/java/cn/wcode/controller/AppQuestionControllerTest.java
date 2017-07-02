@@ -32,6 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = Application.class)
 public class AppQuestionControllerTest {
 
+
+
   private Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired
@@ -45,6 +47,21 @@ public class AppQuestionControllerTest {
         .param("userId", "6")
         .param("token", "1bb9881b-11fe-46b8-adc5-795b433568ae")
         .param("qGroupId", "1"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+  }
+
+  @Test
+  public void importQuestion() throws Exception {
+
+  }
+
+  @Test
+  public void importData() throws Exception {
+    MvcResult result = mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(三).html"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
