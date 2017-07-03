@@ -72,12 +72,11 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public Result<String> importData(String filepath) {
+    public Result<String> importData(String filepath, int groupId) {
         String txt = FileUtil.readTxtFile(filepath);
         Pattern p = Pattern.compile("<h3[\\s\\S]*?(?=<h3)");
         Matcher m = p.matcher(txt);
         while(m.find()) {
-            Integer groupId = 1;
             String content = m.group();
             Document doc = Jsoup.parse(content);
             String question = doc.select("h3").first().text();

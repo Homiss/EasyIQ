@@ -10,5 +10,8 @@
   <select id="getByQuestionGroupId" resultType="cn.wcode.model.Question">
     select * from question where q_group_id = #{qGroupId}
   </select>
+  <select id="selectCountByGroupId" resultType="java.lang.Integer">
+    select count(id) from question where q_group_id = #{groupId}
+  </select>
 
 </mapper>

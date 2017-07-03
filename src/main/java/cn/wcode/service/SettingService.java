@@ -31,4 +31,10 @@ public class SettingService {
   public void insert(Setting setting) {
     settingMapper.insertSelective(setting);
   }
+
+  public void updateGroupIdByUserId(Integer userId, Integer groupId) {
+    Setting setting = selectByUserId(userId);
+    setting.setQGroupId(groupId);
+    settingMapper.updateByPrimaryKey(setting);
+  }
 }

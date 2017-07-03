@@ -60,8 +60,64 @@ public class AppQuestionControllerTest {
 
   @Test
   public void importData() throws Exception {
-    MvcResult result = mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(三).html"))
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(一).html")
+        .param("groupId", "1")
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(二).html")
+        .param("groupId", "1")
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(三).html")
+        .param("groupId", "1")
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/相关概念.html")
+        .param("groupId", "2")
+        )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/集合相关.html")
+        .param("groupId", "3")
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/Spring 面试题.html")
+        .param("groupId", "4")
+    )
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/Desktop/排序算法.html")
+        .param("groupId", "5")
+    )
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))

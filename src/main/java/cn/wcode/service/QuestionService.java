@@ -78,4 +78,8 @@ public class QuestionService {
       question.setAnswer(answer);
       questionMapper.updateByPrimaryKeySelective(question);
   }
+
+    public Integer selectCountByGroupId(String groupId) {
+        return questionMapper.selectCountByGroupId(groupId);
+    }
 }

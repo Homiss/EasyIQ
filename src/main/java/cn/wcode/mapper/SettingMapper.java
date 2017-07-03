@@ -9,4 +9,6 @@ public interface SettingMapper extends MyMapper<Setting> {
   Map<String, Object> selectMapByUserId(Integer userId);
 
   Setting selectByUserId(Integer userId);
+
+  void updateGroupIdByUserId(Integer userId, Integer groupId);
 }

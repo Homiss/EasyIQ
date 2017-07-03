@@ -67,6 +67,14 @@ public class AppSettingController {
     return new Result<>("操作成功～");
   }
 
-
+  /**
+   * 修改当前用户的题库
+   */
+  @RequestMapping(value = "/v1/modify/group", method = RequestMethod.POST)
+  @ResponseBody
+  public Result<String> modifyGroup(Integer userId, Integer groupId){
+    settingService.updateGroupIdByUserId(userId, groupId);
+    return new Result<>("操作成功～");
+  }
 
 }

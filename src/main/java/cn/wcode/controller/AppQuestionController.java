@@ -51,12 +51,36 @@ public class AppQuestionController {
     }
 
     /**
-     * 获取题库列表
+     * 获取所有题库列表
      * @param userId
      * @return
      */
     @RequestMapping("/v1/groups")
-    public Result<List<Map<String, String>>> getAll(Integer userId) {
+    public Result<List<Map<String, String>>> allGroup(Integer userId) {
+        List<QuestionGroup> questiongroupList = questionGroupService.selectAll();
+        List<Map<String, String>> groups = new ArrayList<>();
+        for(QuestionGroup questionGroup : questiongroupList) {
+            Map<String, String> temp = new HashMap<>();
+            temp.put("name", questionGroup.getName());
+            temp.put("id", String.valueOf(questionGroup.getId()));
+            Integer sumCount = questionService.selectCountByGroupId(String.valueOf(questionGroup.getId()));
+            if(sumCount == null || sumCount == 0) continue;
+            temp.put("sumCount", String.valueOf(sumCount));
+            Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId,
+                String.valueOf(questionGroup.getId()));
+            temp.put("hasReciteCount", hasReciteCount == null ? "0" : String.valueOf(hasReciteCount));
+            groups.add(temp);
+        }
+        return new Result<>(groups);
+    }
+
+    /**
+     * 获取我的题库列表
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/v1/groups/mine")
+    public Result<List<Map<String, String>>> mineGroups(Integer userId) {
         List<QuestionGroup> questiongroupList = questionGroupService.selectAll();
         List<Map<String, String>> groups = new ArrayList<>();
         for(QuestionGroup questionGroup : questiongroupList) {
