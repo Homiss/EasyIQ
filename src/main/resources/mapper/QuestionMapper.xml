@@ -7,7 +7,7 @@
     <result column="question" jdbcType="VARCHAR" property="question" />
     <result column="answer" jdbcType="VARCHAR" property="answer" />
   </resultMap>
-  <select id="getByQuestionGroupId" resultType="cn.wcode.model.Question">
+  <select id="getByQuestionGroupId" resultMap="BaseResultMap">
     select * from question where group_id = #{groupId}
   </select>
   <select id="selectCountByGroupId" resultType="java.lang.Integer">

@@ -13,6 +13,9 @@
     <result column="next_date" jdbcType="TIMESTAMP" property="nextDate" />
     <result column="need_recite" jdbcType="INTEGER" property="needRecite" />
   </resultMap>
+  <delete id="deleteByGroupId">
+    delete from recite_record where user_id = #{userId} and group_id = #{groupId}
+  </delete>
 
   <select id="selectTodayTask" resultType="cn.wcode.dto.ReciteQuestionDto">
     select

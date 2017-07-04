@@ -75,6 +75,7 @@ public class ReciteRecordService {
         for(Question q : questions){
             ReciteRecord reciteRecord = ReciteRecord.builder()
                 .userId(userId)
+                .groupId(q.getGroupId())
                 .questionId(q.getId())
                 .level(0)
                 .strange(0)
@@ -82,6 +83,7 @@ public class ReciteRecordService {
                 .nextDate(new Date())
                 .needRecite(1)
                 .build();
+            System.out.println(q.toString());
             reciteRecordMapper.insert(reciteRecord);
         }
     }
@@ -124,5 +126,9 @@ public class ReciteRecordService {
      */
     public Boolean hasAdd(Integer userId, Integer groupId) {
         return reciteRecordMapper.hasAdd(userId, groupId) > 0 ? true : false;
+    }
+
+    public void deleteByGroupId(Integer userId, Integer groupId) {
+        reciteRecordMapper.deleteByGroupId(userId, groupId);
     }
 }

@@ -42,12 +42,22 @@ public class AppQuestionController {
     /**
      * 添加题库到我的
      */
-    @RequestMapping("/v1/add")
+    @RequestMapping("/v1/group/addToMine")
     @ResponseBody
-    public Result<String> addQuestionGroup(Integer userId, int groupId){
+    public Result<String> addQuestionGroup(Integer userId, Integer groupId){
         List<Question> questions = questionService.getByQuestionGroupId(groupId);
         reciteRecordService.addQuestions(userId, questions);
         return new Result<>("添加题库成功～");
+    }
+
+    /**
+     * 从我的题库中移除
+     */
+    @RequestMapping(value = "/v1/group/removeFromMine", method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> removeGroupFromMine(Integer userId, Integer groupId){
+        reciteRecordService.deleteByGroupId(userId, groupId);
+        return new Result<>("移除题库成功～");
     }
 
     /**
