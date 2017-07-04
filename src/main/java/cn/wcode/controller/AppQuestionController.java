@@ -105,6 +105,7 @@ public class AppQuestionController {
     public Result<Map<String, Object>> questionList(@RequestParam("userId") Integer userId,
         @RequestParam("groupId") Integer groupId){
         Map<String, Object> result = new HashMap<>();
+
         List<Question> questions = questionService.getByQuestionGroupId(groupId);
         Boolean hasAdd = reciteRecordService.hasAdd(userId, groupId);
         result.put("list", questions);
