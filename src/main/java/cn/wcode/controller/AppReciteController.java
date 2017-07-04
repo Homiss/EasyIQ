@@ -34,7 +34,7 @@ public class AppReciteController {
   @RequestMapping("/v1/today/task")
   @ResponseBody
   public Result<PageInfo<ReciteQuestionDto>> selectTodayTask(@RequestParam("userId") int userId,
-      @RequestParam("groupId") int groupId, ReciteRecord reciteRecord) {
+      ReciteRecord reciteRecord) {
     List<ReciteQuestionDto> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
     return new Result<>(new PageInfo<>(reciteRecordList));
   }

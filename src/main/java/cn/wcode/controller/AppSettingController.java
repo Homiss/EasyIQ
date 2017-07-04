@@ -49,9 +49,11 @@ public class AppSettingController {
       result = settingService.selectMapByUserId(userId);
     }
     // 根据groupId获取总题数
-    Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(result.get("groupId")));
+    Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId,
+        (Integer) result.get("groupId"));
     // 获取已背题数
-    Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId, String.valueOf(result.get("groupId")));
+    Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId,
+        (Integer) result.get("groupId"));
     result.put("sumCount", sumCount);
     result.put("hasReciteCount", hasReciteCount);
     return new Result<>(result);
@@ -74,7 +76,7 @@ public class AppSettingController {
   @ResponseBody
   public Result<String> modifyGroup(Integer userId, Integer groupId){
     settingService.updateGroupIdByUserId(userId, groupId);
-    return new Result<>("操作成功～");
+    return new Result<>("修改题库成功～");
   }
 
 }

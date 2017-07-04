@@ -16,7 +16,7 @@
   </select>
   <select id="selectMapByUserId" resultType="java.util.Map">
     select
-    s.id, s.group_id as qroupId, s.recite_model as reciteModel, s.recite_num as reciteNum,
+    s.id, s.group_id as groupId, s.recite_model as reciteModel, s.recite_num as reciteNum,
     g.name as groupName
     from setting s
     left join question_group g on g.id = s.group_id

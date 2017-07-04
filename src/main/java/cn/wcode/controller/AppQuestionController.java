@@ -77,7 +77,7 @@ public class AppQuestionController {
             if(sumCount == null || sumCount == 0) continue;
             temp.put("sumCount", String.valueOf(sumCount));
             Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId,
-                String.valueOf(questionGroup.getId()));
+                questionGroup.getId());
             temp.put("hasReciteCount", hasReciteCount == null ? "0" : String.valueOf(hasReciteCount));
             groups.add(temp);
         }
@@ -97,11 +97,11 @@ public class AppQuestionController {
             Map<String, String> temp = new HashMap<>();
             temp.put("name", questionGroup.getName());
             temp.put("id", String.valueOf(questionGroup.getId()));
-            Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(questionGroup.getId()));
+            Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, questionGroup.getId());
             if(sumCount == null || sumCount == 0) continue;
             temp.put("sumCount", String.valueOf(sumCount));
             Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId,
-                String.valueOf(questionGroup.getId()));
+                questionGroup.getId());
             temp.put("hasReciteCount", hasReciteCount == null ? "0" : String.valueOf(hasReciteCount));
             groups.add(temp);
         }

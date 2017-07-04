@@ -22,7 +22,7 @@
     r.id, r.group_id as groupId, r.question_id as questionId, q.question, q.answer, r.level, r.strange
     from recite_record r
     left join question q on q.id = r.question_id
-    where now() >= r.next_date and need_recite = 1
+    where now() >= r.next_date and need_recite = 1 and r.group_id = #{groupId} and user_id = #{userId}
   </select>
   <select id="selectCountByUserIdAndGroupId" resultType="java.lang.Integer">
     select count(r.id)

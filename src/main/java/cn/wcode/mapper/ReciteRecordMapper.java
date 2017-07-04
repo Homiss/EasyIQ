@@ -9,11 +9,11 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ReciteRecordMapper extends MyMapper<ReciteRecord> {
 
-  List<ReciteQuestionDto> selectTodayTask();
+  List<ReciteQuestionDto> selectTodayTask(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 
-  Integer selectCountByUserIdAndGroupId(@Param("userId") Integer userId, @Param("groupId") String groupId);
+  Integer selectCountByUserIdAndGroupId(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 
-  Integer selectHasReciteRecordNum(@Param("userId") Integer userId, @Param("groupId") String groupId);
+  Integer selectHasReciteRecordNum(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 
   Integer hasAdd(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 

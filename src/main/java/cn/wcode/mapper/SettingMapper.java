@@ -10,5 +10,4 @@ public interface SettingMapper extends MyMapper<Setting> {
 
   Setting selectByUserId(Integer userId);
 
-  void updateGroupIdByUserId(Integer userId, Integer groupId);
 }

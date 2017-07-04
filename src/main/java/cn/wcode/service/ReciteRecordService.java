@@ -47,7 +47,7 @@ public class ReciteRecordService {
         if (reciteRecord.getPage() != null && reciteRecord.getRows() != null) {
             PageHelper.startPage(reciteRecord.getPage(), reciteRecord.getRows());
         }
-        return reciteRecordMapper.selectTodayTask();
+        return reciteRecordMapper.selectTodayTask(reciteRecord.getUserId(), reciteRecord.getGroupId());
     }
 
     public ReciteRecord getById(Integer id) {
@@ -110,11 +110,11 @@ public class ReciteRecordService {
         reciteRecordMapper.updateByPrimaryKey(reciteRecord);
     }
 
-    public Integer selectCountByUserIdAndGroupId(Integer userId, String groupId) {
+    public Integer selectCountByUserIdAndGroupId(Integer userId, Integer groupId) {
         return reciteRecordMapper.selectCountByUserIdAndGroupId(userId, groupId);
     }
 
-    public Integer selectHasReciteRecordNum(Integer userId, String groupId) {
+    public Integer selectHasReciteRecordNum(Integer userId, Integer groupId) {
         return reciteRecordMapper.selectHasReciteRecordNum(userId, groupId);
     }
 
