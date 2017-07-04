@@ -34,7 +34,7 @@ public class SettingService {
 
   public void updateGroupIdByUserId(Integer userId, Integer groupId) {
     Setting setting = selectByUserId(userId);
-    setting.setQGroupId(groupId);
+    setting.setGroupId(groupId);
     settingMapper.updateByPrimaryKey(setting);
   }
 }

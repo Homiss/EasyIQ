@@ -14,4 +14,6 @@ public interface ReciteRecordMapper extends MyMapper<ReciteRecord> {
   Integer selectCountByUserIdAndGroupId(@Param("userId") Integer userId, @Param("groupId") String groupId);
 
   Integer selectHasReciteRecordNum(@Param("userId") Integer userId, @Param("groupId") String groupId);
+
+  Integer hasAdd(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 }

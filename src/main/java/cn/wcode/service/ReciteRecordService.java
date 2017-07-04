@@ -115,4 +115,14 @@ public class ReciteRecordService {
     public Integer selectHasReciteRecordNum(Integer userId, String groupId) {
         return reciteRecordMapper.selectHasReciteRecordNum(userId, groupId);
     }
+
+    /**
+     * 判断用户是否加入过当前题库
+     * @param userId
+     * @param groupId
+     * @return
+     */
+    public Boolean hasAdd(Integer userId, Integer groupId) {
+        return reciteRecordMapper.hasAdd(userId, groupId) > 0 ? true : false;
+    }
 }

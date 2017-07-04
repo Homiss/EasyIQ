@@ -85,7 +85,7 @@ public class QuestionController {
             Question bean = Question.builder()
                 .question(question)
                 .answer(answer)
-                .qGroupId(groupId)
+                .groupId(groupId)
                 .build();
             questionService.save(bean);
         }

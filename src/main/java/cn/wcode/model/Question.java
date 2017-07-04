@@ -18,8 +18,8 @@ import lombok.ToString;
 @EqualsAndHashCode(of = {"id"})
 public class Question extends BaseEntity{
 
-    @Column(name = "q_group_id")
-    private Integer qGroupId;
+    @Column(name = "group_id")
+    private Integer groupId;
 
     private String question;
 

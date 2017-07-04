@@ -20,6 +20,7 @@ public class ReciteQuestionDto {
 
   private Long id;
   private String question;
+  private Integer groupId;
   private Integer questionId;
   private String answer;
   private Integer level;

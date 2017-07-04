@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface QuestionMapper extends MyMapper<Question> {
 
-  List<Question> getByQuestionGroupId(int qGroupId);
+  List<Question> getByQuestionGroupId(int groupId);
 
   Integer selectCountByGroupId(String groupId);
 }

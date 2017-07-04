@@ -24,8 +24,8 @@ public class Setting extends BaseEntity{
     /**
      * 当前选中题库id
      */
-    @Column(name = "q_group_id")
-    private Integer qGroupId;
+    @Column(name = "group_id")
+    private Integer groupId;
 
     /**
      * 背题模式：0，顺序 1，随机

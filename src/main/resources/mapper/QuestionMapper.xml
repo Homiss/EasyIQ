@@ -3,15 +3,15 @@
 <mapper namespace="cn.wcode.mapper.QuestionMapper">
   <resultMap id="BaseResultMap" type="cn.wcode.model.Question">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="q_group_id" jdbcType="INTEGER" property="qGroupId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
     <result column="question" jdbcType="VARCHAR" property="question" />
     <result column="answer" jdbcType="VARCHAR" property="answer" />
   </resultMap>
   <select id="getByQuestionGroupId" resultType="cn.wcode.model.Question">
-    select * from question where q_group_id = #{qGroupId}
+    select * from question where group_id = #{groupId}
   </select>
   <select id="selectCountByGroupId" resultType="java.lang.Integer">
-    select count(id) from question where q_group_id = #{groupId}
+    select count(id) from question where group_id = #{groupId}
   </select>
 
 </mapper>

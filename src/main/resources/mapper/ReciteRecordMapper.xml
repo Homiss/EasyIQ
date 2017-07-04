@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.wcode.model.ReciteRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
     <result column="question_id" jdbcType="INTEGER" property="questionId" />
     <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
     <result column="last_date" jdbcType="TIMESTAMP" property="lastDate" />
@@ -15,7 +16,7 @@
 
   <select id="selectTodayTask" resultType="cn.wcode.dto.ReciteQuestionDto">
     select
-    r.id, r.question_id as questionId, q.question, q.answer, r.level, r.strange
+    r.id, r.group_id as groupId, r.question_id as questionId, q.question, q.answer, r.level, r.strange
     from recite_record r
     left join question q on q.id = r.question_id
     where now() >= r.next_date and need_recite = 1
@@ -23,14 +24,16 @@
   <select id="selectCountByUserIdAndGroupId" resultType="java.lang.Integer">
     select count(r.id)
     from recite_record r
-    right join question q on q.id = r.question_id and q.q_group_id = #{groupId}
-    where r.user_id = #{userId}
+    where r.user_id = #{userId} and r.group_id = #{groupId}
   </select>
   <select id="selectHasReciteRecordNum" resultType="java.lang.Integer">
     select count(r.id)
     from recite_record r
-    right join question q on q.id = r.question_id and q.q_group_id = #{groupId}
-    where r.user_id = #{userId} and need_recite = 0
+    where r.user_id = #{userId} and need_recite = 0 and r.group_id = #{groupId}
+  </select>
+  <select id="hasAdd" resultType="java.lang.Integer">
+    select COUNT(r.id) from recite_record r
+    where r.group_id = #{groupId}
   </select>
 </mapper>
 

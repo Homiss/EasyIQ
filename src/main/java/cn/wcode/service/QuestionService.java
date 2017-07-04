@@ -68,8 +68,8 @@ public class QuestionService {
     }
 
 
-    public List<Question> getByQuestionGroupId(int qGroupId) {
-        return questionMapper.getByQuestionGroupId(qGroupId);
+    public List<Question> getByQuestionGroupId(int groupId) {
+        return questionMapper.getByQuestionGroupId(groupId);
     }
 
   public void modifyAnswer(int id, String answer) {

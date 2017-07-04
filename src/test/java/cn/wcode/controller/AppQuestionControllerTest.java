@@ -46,7 +46,7 @@ public class AppQuestionControllerTest {
     MvcResult result = mvc.perform(post("/api/app/question/v1/add")
         .param("userId", "6")
         .param("token", "1bb9881b-11fe-46b8-adc5-795b433568ae")
-        .param("qGroupId", "1"))
+        .param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))

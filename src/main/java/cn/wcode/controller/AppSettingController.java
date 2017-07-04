@@ -39,7 +39,7 @@ public class AppSettingController {
     if(result == null){ // 用户初次使用
       Setting setting = Setting.builder()
           .userId(userId)
-          .qGroupId(1)
+          .groupId(1)
           .reciteModel(1)
           .reciteNum(20)
           .build();
@@ -49,9 +49,9 @@ public class AppSettingController {
       result = settingService.selectMapByUserId(userId);
     }
     // 根据groupId获取总题数
-    Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(result.get("qGroupId")));
+    Integer sumCount = reciteRecordService.selectCountByUserIdAndGroupId(userId, String.valueOf(result.get("groupId")));
     // 获取已背题数
-    Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId, String.valueOf(result.get("qGroupId")));
+    Integer hasReciteCount = reciteRecordService.selectHasReciteRecordNum(userId, String.valueOf(result.get("groupId")));
     result.put("sumCount", sumCount);
     result.put("hasReciteCount", hasReciteCount);
     return new Result<>(result);

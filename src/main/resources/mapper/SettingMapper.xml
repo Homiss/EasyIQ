@@ -7,7 +7,7 @@
     -->
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="q_group_id" property="qGroupId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="recite_model" property="reciteModel" jdbcType="INTEGER" />
     <result column="recite_num" property="reciteNum" jdbcType="INTEGER" />
   </resultMap>
@@ -16,10 +16,10 @@
   </select>
   <select id="selectMapByUserId" resultType="java.util.Map">
     select
-    s.id, s.q_group_id as qGroupId, s.recite_model as reciteModel, s.recite_num as reciteNum,
+    s.id, s.group_id as qroupId, s.recite_model as reciteModel, s.recite_num as reciteNum,
     g.name as groupName
     from setting s
-    left join question_group g on g.id = s.q_group_id
+    left join question_group g on g.id = s.group_id
     where s.user_id = #{userId}
   </select>
 </mapper>

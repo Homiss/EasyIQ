@@ -23,6 +23,9 @@ public class ReciteRecord extends BaseEntity{
     @Column(name = "user_id")
     private Integer userId;
 
+    @Column(name = "group_id")
+    private Integer groupId;
+
     @Column(name = "question_id")
     private Integer questionId;
 

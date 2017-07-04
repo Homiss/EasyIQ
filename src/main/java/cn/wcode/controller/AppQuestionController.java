@@ -44,8 +44,8 @@ public class AppQuestionController {
      */
     @RequestMapping("/v1/add")
     @ResponseBody
-    public Result<String> addQuestionGroup(Integer userId, int qGroupId){
-        List<Question> questions = questionService.getByQuestionGroupId(qGroupId);
+    public Result<String> addQuestionGroup(Integer userId, int groupId){
+        List<Question> questions = questionService.getByQuestionGroupId(groupId);
         reciteRecordService.addQuestions(userId, questions);
         return new Result<>("添加题库成功～");
     }
@@ -102,10 +102,14 @@ public class AppQuestionController {
      * 通过题库获取题目列表
      */
     @RequestMapping("/v1/groups/list")
-    public Result<List<Question>> questionList(@RequestParam("userId") Integer userId,
+    public Result<Map<String, Object>> questionList(@RequestParam("userId") Integer userId,
         @RequestParam("groupId") Integer groupId){
+        Map<String, Object> result = new HashMap<>();
         List<Question> questions = questionService.getByQuestionGroupId(groupId);
-        return new Result<>(questions);
+        Boolean hasAdd = reciteRecordService.hasAdd(userId, groupId);
+        result.put("list", questions);
+        result.put("hasAdd", hasAdd);
+        return new Result<>(result);
     }
 
     /**

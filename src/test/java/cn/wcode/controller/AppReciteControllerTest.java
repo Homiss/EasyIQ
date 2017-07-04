@@ -38,7 +38,7 @@ public class AppReciteControllerTest {
 
   @Test
   public void testAddQuestionGroup() throws Exception {
-    MvcResult result = mvc.perform(post("/app/v1/recite/add").param("qGroupId", "1"))
+    MvcResult result = mvc.perform(post("/app/v1/recite/add").param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
