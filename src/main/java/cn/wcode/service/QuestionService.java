@@ -78,4 +78,8 @@ public class QuestionService {
     public Integer selectCountByGroupId(String groupId) {
         return questionMapper.selectCountByGroupId(groupId);
     }
+
+    public Integer selectIdByQuestion(String question) {
+        return questionMapper.selectIdByQuestion(question);
+    }
 }

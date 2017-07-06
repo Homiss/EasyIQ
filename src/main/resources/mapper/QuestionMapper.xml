@@ -13,5 +13,8 @@
   <select id="selectCountByGroupId" resultType="java.lang.Integer">
     select count(id) from question where group_id = #{groupId}
   </select>
+  <select id="selectIdByQuestion" resultType="java.lang.Integer">
+    select id from question where question = #{question}
+  </select>
 
 </mapper>

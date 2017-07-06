@@ -18,4 +18,8 @@ public interface ReciteRecordMapper extends MyMapper<ReciteRecord> {
   Integer hasAdd(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 
   void deleteByGroupId(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
+
+  List<Integer> selectUserIdsByGroupId(int groupId);
+
+  String selectIdByQuestionId(Integer questionId);
 }

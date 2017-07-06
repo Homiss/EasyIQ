@@ -9,4 +9,6 @@ public interface QuestionMapper extends MyMapper<Question> {
   List<Question> getByQuestionGroupId(int groupId);
 
   Integer selectCountByGroupId(String groupId);
+
+  Integer selectIdByQuestion(String question);
 }

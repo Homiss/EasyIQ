@@ -83,7 +83,6 @@ public class ReciteRecordService {
                 .nextDate(new Date())
                 .needRecite(1)
                 .build();
-            System.out.println(q.toString());
             reciteRecordMapper.insert(reciteRecord);
         }
     }
@@ -130,5 +129,13 @@ public class ReciteRecordService {
 
     public void deleteByGroupId(Integer userId, Integer groupId) {
         reciteRecordMapper.deleteByGroupId(userId, groupId);
+    }
+
+    public List<Integer> selectUserIdsByGroupId(int groupId) {
+        return reciteRecordMapper.selectUserIdsByGroupId(groupId);
+    }
+
+    public String selectIdByQuestionId(Integer questionId) {
+        return reciteRecordMapper.selectIdByQuestionId(questionId);
     }
 }

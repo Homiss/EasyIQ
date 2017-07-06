@@ -38,5 +38,11 @@
     select COUNT(r.id) from recite_record r
     where r.group_id = #{groupId}
   </select>
+  <select id="selectUserIdsByGroupId" resultType="java.lang.Integer">
+    select DISTINCT user_id from recite_record where group_id = #{groupId}
+  </select>
+  <select id="selectIdByQuestionId" resultType="java.lang.String">
+    select id from recite_record where question_id = #{questionId}
+  </select>
 </mapper>
 

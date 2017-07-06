@@ -3,9 +3,12 @@ package cn.wcode.controller;
 
 import cn.wcode.dto.Result;
 import cn.wcode.model.Question;
+import cn.wcode.model.ReciteRecord;
 import cn.wcode.service.QuestionService;
+import cn.wcode.service.ReciteRecordService;
 import cn.wcode.util.FileUtil;
 import com.github.pagehelper.PageInfo;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +28,8 @@ public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private ReciteRecordService reciteRecordService;
 
     /**
      *
@@ -75,15 +80,37 @@ public class QuestionController {
         while(m.find()) {
             String content = m.group();
             Document doc = Jsoup.parse(content);
-            String question = doc.select("h3").first().text();
+            String question = doc.select("h3").first().text().trim();
             doc.select("h3").first().remove();
             String answer = doc.body().html();
+
+            Integer id = questionService.selectIdByQuestion(question);
             Question bean = Question.builder()
                 .question(question)
                 .answer(answer)
                 .groupId(groupId)
                 .build();
+            bean.setId(id);
             questionService.save(bean);
+            String idTmp = reciteRecordService.selectIdByQuestionId(bean.getId());
+            if(idTmp == null){
+                // 获取所有添加了当前题库的用户id
+                List<Integer> userIds = reciteRecordService.selectUserIdsByGroupId(groupId);
+                for(Integer userId : userIds){
+                    ReciteRecord reciteRecord = ReciteRecord.builder()
+                        .userId(userId)
+                        .groupId(groupId)
+                        .questionId(bean.getId())
+                        .level(0)
+                        .strange(0)
+                        .startDate(new Date())
+                        .nextDate(new Date())
+                        .needRecite(1)
+                        .build();
+                    reciteRecordService.save(reciteRecord);
+                }
+            }
+
         }
         return new Result<>("");
     }
