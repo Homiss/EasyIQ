@@ -24,12 +24,6 @@
 
 package cn.wcode.model;
 
-/**
- * mybatis 3.3.1新功能测试使用
- *
- * @author liuzh
- * @since 2016-01-22 22:16
- */
 public class City2 {
     private Integer id;
 

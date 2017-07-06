@@ -32,8 +32,6 @@ import java.util.List;
 /**
  * mybatis3.3.1版本新增功能测试
  *
- * @author liuzh
- * @since 2016-03-06 17:22
  */
 public interface MyBatis331Mapper {
 

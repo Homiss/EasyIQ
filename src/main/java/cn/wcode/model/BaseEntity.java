@@ -36,8 +36,6 @@ import lombok.ToString;
 /**
  * 基础信息
  *
- * @author liuzh
- * @since 2016-01-31 21:42
  */
 
 public class BaseEntity {

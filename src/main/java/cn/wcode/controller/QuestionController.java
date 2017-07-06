@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @author liuzh
- * @since 2015-12-19 11:10
- */
 @RestController
 @RequestMapping("/question")
 public class QuestionController {

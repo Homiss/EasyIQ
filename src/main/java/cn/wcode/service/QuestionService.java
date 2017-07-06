@@ -31,10 +31,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author liuzh
- * @since 2015-12-19 11:09
- */
 @Service
 public class QuestionService {
 
