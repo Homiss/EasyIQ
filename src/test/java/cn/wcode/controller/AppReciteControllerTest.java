@@ -31,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = Application.class)
 public class AppReciteControllerTest {
 
+
+
   private Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired
@@ -38,7 +40,7 @@ public class AppReciteControllerTest {
 
   @Test
   public void testAddQuestionGroup() throws Exception {
-    MvcResult result = mvc.perform(post("/app/v1/recite/add").param("groupId", "1"))
+    MvcResult result = mvc.perform(post("/api/app/v1/recite/add").param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
@@ -47,7 +49,18 @@ public class AppReciteControllerTest {
 
   @Test
   public void selectTodayTask() throws Exception {
-    MvcResult result = mvc.perform(post("/app/v1/recite/today/task"))
+    MvcResult result = mvc.perform(post("/api/app/recite/v1/today/task"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+  }
+
+  @Test
+  public void finishRecord() throws Exception {
+    MvcResult result = mvc.perform(post("/api/app/recite/v1/finish/record")
+        .param("userId", "6")
+        .param("token", "3d7f4bf6-0223-4c77-b508-b5b5fd01866e"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))

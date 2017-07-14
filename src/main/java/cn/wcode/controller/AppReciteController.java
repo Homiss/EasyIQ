@@ -8,6 +8,7 @@ import cn.wcode.service.QuestionService;
 import cn.wcode.service.ReciteRecordService;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +49,16 @@ public class AppReciteController {
   public Result<String> modifyRecord(int id, int status){
     reciteRecordService.modifyReciteRecord(id, status);
     return new Result<>("更新记录成功～");
+  }
+
+  /**
+   * 获取已完成的题目列表
+   */
+  @RequestMapping(value = "/v1/finish/record", method = RequestMethod.POST)
+  @ResponseBody
+  public Result<List<Map<String, String>>> finishRecord(@RequestParam("userId") int userId){
+    List<Map<String, String>> records = reciteRecordService.selectHasReciteRecord(userId);
+    return new Result<>(records);
   }
 
 

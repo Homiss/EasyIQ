@@ -22,4 +22,6 @@ public interface ReciteRecordMapper extends MyMapper<ReciteRecord> {
   List<Integer> selectUserIdsByGroupId(int groupId);
 
   String selectIdByQuestionId(Integer questionId);
+
+  List<Map<String,String>> selectHasReciteRecord(int userId);
 }

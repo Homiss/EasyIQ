@@ -138,4 +138,8 @@ public class ReciteRecordService {
     public String selectIdByQuestionId(Integer questionId) {
         return reciteRecordMapper.selectIdByQuestionId(questionId);
     }
+
+    public List<Map<String, String>> selectHasReciteRecord(int userId) {
+        return reciteRecordMapper.selectHasReciteRecord(userId);
+    }
 }
