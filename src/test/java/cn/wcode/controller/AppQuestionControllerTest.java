@@ -61,63 +61,56 @@ public class AppQuestionControllerTest {
   @Test
   public void importData() throws Exception {
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(一).html")
-        .param("groupId", "1")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/多线程/Java面试题之多线程(一).html")
+        .param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(二).html")
-        .param("groupId", "1")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/多线程/Java面试题之多线程(二).html")
+        .param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/Java面试题之多线程(三).html")
-        .param("groupId", "1")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/多线程/Java面试题之多线程(三).html")
+        .param("groupId", "1"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/相关概念.html")
-        .param("groupId", "2")
-        )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/面向对象/面向对象.html")
+        .param("groupId", "2"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/集合相关.html")
-        .param("groupId", "3")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/集合/集合相关.html")
+        .param("groupId", "3"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/Spring 面试题.html")
-        .param("groupId", "4")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/框架/Spring 面试题.html")
+        .param("groupId", "4"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
         .andReturn();
 
     mvc.perform(post("/question/import")
-        .param("filepath", "/Users/homiss/Desktop/排序算法.html")
-        .param("groupId", "5")
-    )
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/算法/排序算法.html")
+        .param("groupId", "5"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
