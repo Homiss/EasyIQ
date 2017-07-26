@@ -32,8 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = Application.class)
 public class AppQuestionControllerTest {
 
-
-
   private Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired
@@ -60,7 +58,7 @@ public class AppQuestionControllerTest {
 
   @Test
   public void importData() throws Exception {
-    mvc.perform(post("/question/import")
+    /*mvc.perform(post("/question/import")
         .param("filepath", "/Users/homiss/github/Java-interview-questions/多线程/Java面试题之多线程(一).html")
         .param("groupId", "1"))
         .andDo(print())
@@ -114,7 +112,41 @@ public class AppQuestionControllerTest {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.success").value(true))
+        .andReturn();*/
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/JVM/JVM面试题.html")
+        .param("groupId", "6"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
         .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/JDBC/JDBC面试题.html")
+        .param("groupId", "7"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/网络编程/Java网络编程面试题.html")
+        .param("groupId", "8"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
+
+    mvc.perform(post("/question/import")
+        .param("filepath", "/Users/homiss/github/Java-interview-questions/异常处理/Java异常处理面试题.html")
+        .param("groupId", "9"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.success").value(true))
+        .andReturn();
+
   }
 
 }

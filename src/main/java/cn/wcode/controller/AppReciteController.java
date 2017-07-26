@@ -4,8 +4,11 @@ import cn.wcode.dto.ReciteQuestionDto;
 import cn.wcode.dto.Result;
 import cn.wcode.model.Question;
 import cn.wcode.model.ReciteRecord;
+import cn.wcode.model.Setting;
 import cn.wcode.service.QuestionService;
 import cn.wcode.service.ReciteRecordService;
+import cn.wcode.service.SettingService;
+import cn.wcode.service.UserService;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,8 @@ public class AppReciteController {
 
   @Autowired
   private ReciteRecordService reciteRecordService;
+  @Autowired
+  private SettingService settingService;
 
   /**
    * 获取需要背诵的题目列表
@@ -34,8 +39,9 @@ public class AppReciteController {
    */
   @RequestMapping("/v1/today/task")
   @ResponseBody
-  public Result<PageInfo<ReciteQuestionDto>> selectTodayTask(@RequestParam("userId") int userId,
-      ReciteRecord reciteRecord) {
+  public Result<PageInfo<ReciteQuestionDto>> selectTodayTask(ReciteRecord reciteRecord) {
+    Setting setting = settingService.selectByUserId(reciteRecord.getUserId());
+    reciteRecord.setRows(setting.getRows() != null ? setting.getRows() : 20);
     List<ReciteQuestionDto> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
     return new Result<>(new PageInfo<>(reciteRecordList));
   }
