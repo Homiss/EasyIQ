@@ -41,7 +41,7 @@ public class AppReciteController {
   @ResponseBody
   public Result<PageInfo<ReciteQuestionDto>> selectTodayTask(ReciteRecord reciteRecord) {
     Setting setting = settingService.selectByUserId(reciteRecord.getUserId());
-    reciteRecord.setRows(setting.getRows() != null ? setting.getRows() : 20);
+    reciteRecord.setRows(setting.getReciteNum() != null ? setting.getReciteNum() : 20);
     List<ReciteQuestionDto> reciteRecordList = reciteRecordService.selectTodayTask(reciteRecord);
     return new Result<>(new PageInfo<>(reciteRecordList));
   }
