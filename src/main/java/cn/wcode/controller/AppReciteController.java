@@ -10,8 +10,10 @@ import cn.wcode.service.ReciteRecordService;
 import cn.wcode.service.SettingService;
 import cn.wcode.service.UserService;
 import com.github.pagehelper.PageInfo;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +66,7 @@ public class AppReciteController {
   @ResponseBody
   public Result<List<Map<String, String>>> finishRecord(@RequestParam("userId") int userId){
     List<Map<String, String>> records = reciteRecordService.selectHasReciteRecord(userId);
+    List<String> demo = new Vector<>();
     return new Result<>(records);
   }
 
